@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - CAVES Drone Synthesizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <style>
+        .docs-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .docs-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--accent-cyan);
+            text-align: center;
+        }
+        
+        .docs-content h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 30px 0 15px;
+            color: var(--accent-orange);
+            border-bottom: 1px solid rgba(255, 165, 0, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .docs-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            color: var(--text-primary);
+        }
+        
+        .docs-content p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .docs-content ul {
+            margin: 16px 0;
+            padding-left: 25px;
+        }
+        
+        .docs-content li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .signal-flow {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            text-align: center;
+            overflow-x: auto;
+        }
+        
+        .module-section {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 18px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .control-item {
+            margin-bottom: 10px;
+        }
+        
+        .control-name {
+            font-weight: 600;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+        }
+        
+        .control-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="docs-content">
+            <a href="index.html" class="back-link">← Back to CAVES</a>
+            
+            <h1>Documentation</h1>
+            
+            <h2>Signal Routing</h2>
+            <p>CAVES uses a straightforward signal path designed for rich, evolving drone sounds:</p>
+            
+            <div class="signal-flow">
+                OSC1 (PWM) + OSC2 (FM)<br>
+                ↓<br>
+                FILTERS (LP + HP with routing)<br>
+                ↓<br>
+                DISTORTION<br>
+                ↓<br>
+                DELAY<br>
+                ↓<br>
+                REVERB<br>
+                ↓<br>
+                MASTER VOLUME → OUTPUT
+            </div>
+            
+            <p>Modulation sources (LFOs and Envelopes) can be routed to various parameters throughout the signal chain for dynamic, evolving sounds.</p>
+
+            <h2>VCO (Oscillators)</h2>
+            <div class="module-section">
+                <h3>Oscillator 1 (PWM)</h3>
+                <div class="control-item">
+                    <span class="control-name">FREQ:</span>
+                    <span class="control-desc">Oscillator frequency (40-440 Hz)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">LEVEL:</span>
+                    <span class="control-desc">Output amplitude (0-100%)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">WIDTH:</span>
+                    <span class="control-desc">Pulse width for harmonic content</span>
+                </div>
+                
+                <h3>Oscillator 2 (FM)</h3>
+                <div class="control-item">
+                    <span class="control-name">FREQ:</span>
+                    <span class="control-desc">Base frequency (40-440 Hz)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">LEVEL:</span>
+                    <span class="control-desc">Output amplitude (0-100%)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">FM:</span>
+                    <span class="control-desc">FM modulation depth (0-10)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">RATIO:</span>
+                    <span class="control-desc">Carrier multiplier for harmonic ratios</span>
+                </div>
+                
+                <h3>Master Controls</h3>
+                <div class="control-item">
+                    <span class="control-name">MASTER:</span>
+                    <span class="control-desc">Overall output level (post-effects)</span>
+                </div>
+            </div>
+
+            <h2>VCF (Filters)</h2>
+            <div class="module-section">
+                <h3>Filter 1 (Low Pass)</h3>
+                <div class="control-item">
+                    <span class="control-name">CUTOFF:</span>
+                    <span class="control-desc">Filter cutoff frequency</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">RES:</span>
+                    <span class="control-desc">Filter resonance amount</span>
+                </div>
+                
+                <h3>Filter 2 (High Pass)</h3>
+                <div class="control-item">
+                    <span class="control-name">CUTOFF:</span>
+                    <span class="control-desc">High-pass cutoff frequency</span>
+                </div>
+                
+                <h3>Routing</h3>
+                <div class="control-item">
+                    <span class="control-name">OSC → FILTER:</span>
+                    <span class="control-desc">Route oscillators to filter inputs</span>
+                </div>
+            </div>
+
+            <h2>ENV (Envelopes)</h2>
+            <div class="module-section">
+                <h3>Envelope 1 & 2</h3>
+                <div class="control-item">
+                    <span class="control-name">ATTACK:</span>
+                    <span class="control-desc">Rise time to peak level</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">DECAY:</span>
+                    <span class="control-desc">Fall time to sustain level</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">SUSTAIN:</span>
+                    <span class="control-desc">Held level during note</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">RELEASE:</span>
+                    <span class="control-desc">Fall time to zero after release</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">TARGET:</span>
+                    <span class="control-desc">Parameter to modulate</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">MODE:</span>
+                    <span class="control-desc">One-shot or looping operation</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">SYNC:</span>
+                    <span class="control-desc">Sync to master clock divisions</span>
+                </div>
+            </div>
+
+            <h2>LFO (Low Frequency Oscillators)</h2>
+            <div class="module-section">
+                <h3>LFO 1 & 2</h3>
+                <div class="control-item">
+                    <span class="control-name">RATE:</span>
+                    <span class="control-desc">LFO speed (0.01-10 Hz)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">DEPTH:</span>
+                    <span class="control-desc">Modulation amount</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">WAVEFORM:</span>
+                    <span class="control-desc">Sine, triangle, square, sawtooth, random</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">TARGET:</span>
+                    <span class="control-desc">Parameter to modulate</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">ON/OFF:</span>
+                    <span class="control-desc">Enable/disable LFO</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">SLOW/FAST:</span>
+                    <span class="control-desc">Rate range (very slow or normal speeds)</span>
+                </div>
+            </div>
+
+            <h2>FX (Effects)</h2>
+            <div class="module-section">
+                <h3>Distortion</h3>
+                <div class="control-item">
+                    <span class="control-name">DRIVE:</span>
+                    <span class="control-desc">Distortion intensity</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">WET:</span>
+                    <span class="control-desc">Dry/wet balance</span>
+                </div>
+                
+                <h3>Delay</h3>
+                <div class="control-item">
+                    <span class="control-name">TIME:</span>
+                    <span class="control-desc">Delay time (up to 2 seconds)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">FEEDBACK:</span>
+                    <span class="control-desc">Delay regeneration amount</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">WET:</span>
+                    <span class="control-desc">Dry/wet balance</span>
+                </div>
+                
+                <h3>Reverb</h3>
+                <div class="control-item">
+                    <span class="control-name">WETNESS:</span>
+                    <span class="control-desc">Reverb amount</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">ENABLE:</span>
+                    <span class="control-desc">Turn reverb on/off</span>
+                </div>
+            </div>
+
+            <h2>Clock</h2>
+            <div class="module-section">
+                <h3>Master Clock</h3>
+                <div class="control-item">
+                    <span class="control-name">BPM:</span>
+                    <span class="control-desc">Tempo for envelope sync (60-200 BPM)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">START/STOP:</span>
+                    <span class="control-desc">Transport controls</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">RESET:</span>
+                    <span class="control-desc">Reset all parameters to defaults</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="https://github.com/cgroner/caves-drone-synth/issues">Support</a>
+            </div>
+            <p class="copyright">© 2025 CAVES</p>
+        </footer>
+    </div>
+</body>
+</html>
