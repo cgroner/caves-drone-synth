@@ -121,7 +121,7 @@
             <div class="signal-flow">
                 OSC1 (PWM) + OSC2 (FM)<br>
                 ↓<br>
-                FILTERS (LP + HP with routing)<br>
+                FILTERS (LP + LADDER with routing)<br>
                 ↓<br>
                 DISTORTION<br>
                 ↓<br>
@@ -187,10 +187,14 @@
                     <span class="control-desc">Filter resonance amount</span>
                 </div>
                 
-                <h3>Filter 2 (High Pass)</h3>
+                <h3>Filter 2 (Ladder)</h3>
                 <div class="control-item">
                     <span class="control-name">CUTOFF:</span>
-                    <span class="control-desc">High-pass cutoff frequency</span>
+                    <span class="control-desc">Ladder filter cutoff frequency</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">RES:</span>
+                    <span class="control-desc">Ladder filter resonance amount</span>
                 </div>
                 
                 <h3>Routing</h3>
@@ -277,15 +281,11 @@
                 <h3>Delay</h3>
                 <div class="control-item">
                     <span class="control-name">TIME:</span>
-                    <span class="control-desc">Delay time (up to 2 seconds)</span>
+                    <span class="control-desc">Delay time (up to 2 seconds) - set to minimum for no delay</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">FEEDBACK:</span>
-                    <span class="control-desc">Delay regeneration amount</span>
-                </div>
-                <div class="control-item">
-                    <span class="control-name">WET:</span>
-                    <span class="control-desc">Dry/wet balance</span>
+                    <span class="control-desc">Delay regeneration amount - set to zero for no delay</span>
                 </div>
                 
                 <h3>Reverb</h3>
