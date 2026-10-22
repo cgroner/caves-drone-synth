@@ -117,20 +117,49 @@
             
             <div style="text-align: center; margin-bottom: 30px;">
                 <span style="color: var(--text-muted); font-size: 0.9rem; font-family: 'JetBrains Mono', monospace;">
-                    App Version 1.3
+                    Version 2.0
                 </span>
             </div>
 
-            <div class="doc-note">
-                <p>
-                    Please note that CAVES is currently a standalone synth app and not currently AUv3 compatible. I hope
-                    to add AUv3 support in the future, but for now is designed to be used as a standalone application.</p>
-                </p>
+            <p>CAVES is two things: a standalone app, and an AUv3 instrument you can play in GarageBand.
+            Both use the same sound engine, so a sound made in one sounds the same in the other. Most
+            controls are the same in both; the differences are noted below.</p>
+
+            <h2>Using CAVES in GarageBand (AUv3)</h2>
+            <div class="module-section">
+                <div class="control-item">
+                    <span class="control-name">LOADING:</span>
+                    <span class="control-desc">Install the CAVES app, then add a new track in GarageBand and choose CAVES from its list of Audio Unit instruments</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">PLAYING:</span>
+                    <span class="control-desc">Play notes from GarageBand's keyboard, a MIDI keyboard or a recorded region. Oscillator 1 plays the note's pitch and Oscillator 2 follows it at its own ratio; key velocity sets the level</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">OCT:</span>
+                    <span class="control-desc">Moves Oscillator 1 up or down by up to 3 octaves. The FREQ knob is greyed out, because the played note sets the pitch</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">TEMPO:</span>
+                    <span class="control-desc">Synced LFOs and envelopes follow the song's tempo and bar position</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">PRESETS:</span>
+                    <span class="control-desc">"CAVES Default" is built in. Save your own sounds with GarageBand's preset menu; your project also remembers every setting. Patches saved in the CAVES app are not available in GarageBand yet</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">AUTOMATION:</span>
+                    <span class="control-desc">Every knob and switch can be automated in GarageBand for Mac (GarageBand for iPad and iPhone can't automate instrument plug-ins)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">TABS:</span>
+                    <span class="control-desc">The plug-in window has the same VCO, VCF, ENV, LFO and FX sections as the app, with shorter labels (AMP for LEVEL, RES for RESONANCE, FB for FEEDBACK, WET for DRY/WET)</span>
+                </div>
             </div>
-            
+
             <h2>Signal Routing</h2>
             <p>CAVES uses a straightforward signal path designed for rich, evolving drone sounds:</p>
-            
+
             <div class="signal-flow">
                 OSC1 (PWM) + OSC2 (FM)<br>
                 ↓<br>
@@ -144,46 +173,63 @@
                 ↓<br>
                 MASTER VOLUME → OUTPUT
             </div>
-            
-            <p>Modulation sources (LFOs and Envelopes) can be routed to various parameters throughout the signal chain for dynamic, evolving sounds.</p>
+
+            <p>Modulation sources (LFOs and Envelopes) can be routed to 14 parameters throughout the signal chain for dynamic, evolving sounds.</p>
+            <p>The output stays clean up to just below full scale, then rounds off gently instead of clipping harshly, so a runaway delay or a screaming filter never goes over 0 dB.</p>
+
+            <h2>Tips</h2>
+            <div class="module-section">
+                <div class="control-item">
+                    <span class="control-name">DOUBLE-TAP:</span>
+                    <span class="control-desc">Double-tap any knob in the plug-in to reset it to its default</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">VOICEOVER:</span>
+                    <span class="control-desc">In the plug-in, every knob speaks its name and value; swipe up or down to adjust it</span>
+                </div>
+            </div>
 
             <h2>VCO (Oscillators)</h2>
             <div class="module-section">
                 <h3>Oscillator 1 (PWM)</h3>
                 <div class="control-item">
                     <span class="control-name">FREQ:</span>
-                    <span class="control-desc">Oscillator frequency (40-440 Hz)</span>
+                    <span class="control-desc">Oscillator frequency (10-440 Hz). App only; in GarageBand the played note sets the pitch</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">OCT:</span>
+                    <span class="control-desc">Octave, -3 to +3 (plug-in only)</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">LEVEL:</span>
                     <span class="control-desc">Output amplitude (0-100%)</span>
                 </div>
                 <div class="control-item">
-                    <span class="control-name">WIDTH:</span>
+                    <span class="control-name">PULSE WIDTH:</span>
                     <span class="control-desc">Pulse width for harmonic content</span>
                 </div>
-                
+
                 <h3>Oscillator 2 (FM)</h3>
                 <div class="control-item">
                     <span class="control-name">FREQ:</span>
-                    <span class="control-desc">Base frequency (40-440 Hz)</span>
+                    <span class="control-desc">Base frequency (20-440 Hz). In GarageBand it follows the played note</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">LEVEL:</span>
                     <span class="control-desc">Output amplitude (0-100%)</span>
                 </div>
                 <div class="control-item">
-                    <span class="control-name">FM:</span>
+                    <span class="control-name">FM INDEX:</span>
                     <span class="control-desc">FM modulation depth (0-10)</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">RATIO:</span>
                     <span class="control-desc">Carrier multiplier for harmonic ratios</span>
                 </div>
-                
+
                 <h3>Master Controls</h3>
                 <div class="control-item">
-                    <span class="control-name">MASTER:</span>
+                    <span class="control-name">MASTER LEVEL:</span>
                     <span class="control-desc">Overall output level (post-effects)</span>
                 </div>
             </div>
@@ -193,27 +239,27 @@
                 <h3>Filter 1 (Low Pass)</h3>
                 <div class="control-item">
                     <span class="control-name">CUTOFF:</span>
-                    <span class="control-desc">Filter cutoff frequency</span>
+                    <span class="control-desc">Filter cutoff frequency (50-8000 Hz)</span>
                 </div>
                 <div class="control-item">
-                    <span class="control-name">RES:</span>
+                    <span class="control-name">RESONANCE:</span>
                     <span class="control-desc">Filter resonance amount</span>
                 </div>
-                
+
                 <h3>Filter 2 (Ladder)</h3>
                 <div class="control-item">
                     <span class="control-name">CUTOFF:</span>
-                    <span class="control-desc">Ladder filter cutoff frequency</span>
+                    <span class="control-desc">Ladder filter cutoff frequency (50-8000 Hz)</span>
                 </div>
                 <div class="control-item">
-                    <span class="control-name">RES:</span>
+                    <span class="control-name">RESONANCE:</span>
                     <span class="control-desc">Ladder filter resonance amount</span>
                 </div>
-                
+
                 <h3>Routing</h3>
                 <div class="control-item">
                     <span class="control-name">OSC → FILTER:</span>
-                    <span class="control-desc">Route oscillators to filter inputs</span>
+                    <span class="control-desc">Route oscillators to filter inputs. An oscillator that isn't routed to a filter is silent</span>
                 </div>
             </div>
 
@@ -222,31 +268,43 @@
                 <h3>Envelope 1 & 2</h3>
                 <div class="control-item">
                     <span class="control-name">ATTACK:</span>
-                    <span class="control-desc">Rise time to peak level</span>
+                    <span class="control-desc">Rise time to peak level (0.1-300 s)</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">DECAY:</span>
-                    <span class="control-desc">Fall time to sustain level</span>
+                    <span class="control-desc">Fall time to sustain level (0.1-300 s)</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">SUSTAIN:</span>
-                    <span class="control-desc">Held level during note</span>
+                    <span class="control-desc">Level held between decay and release</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">RELEASE:</span>
-                    <span class="control-desc">Fall time to zero after release</span>
+                    <span class="control-desc">Fall time to zero (0.1-600 s)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">AMOUNT:</span>
+                    <span class="control-desc">How far the envelope moves its target, from -100% (inverted) to +100%</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">TARGET:</span>
-                    <span class="control-desc">Parameter to modulate</span>
+                    <span class="control-desc">Parameter to modulate. Choose "Off" to turn the envelope off; choosing a target turns it on</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">MODE:</span>
-                    <span class="control-desc">One-shot or looping operation</span>
+                    <span class="control-desc">One Shot (runs once) or Looping (repeats)</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">SYNC:</span>
-                    <span class="control-desc">Sync to master clock divisions</span>
+                    <span class="control-desc">"Free", or a clock division (8 bars to 1/32) to restart the envelope on the beat. A synced envelope runs once per division, even in Looping mode</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">TRIGGER:</span>
+                    <span class="control-desc">Starts the envelope by hand (TRIG in the plug-in). Each new note also restarts it, from its current level</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">MASTER LEVEL TARGET:</span>
+                    <span class="control-desc">An envelope on Master Level acts as the amplifier: the sound is silent until the envelope opens it</span>
                 </div>
             </div>
 
@@ -255,7 +313,15 @@
                 <h3>LFO 1 & 2</h3>
                 <div class="control-item">
                     <span class="control-name">RATE:</span>
-                    <span class="control-desc">LFO speed (0.01-10 Hz)</span>
+                    <span class="control-desc">LFO speed: 0.001-0.5 Hz in SLOW, 0.01-10 Hz in FAST</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">SLOW/FAST:</span>
+                    <span class="control-desc">Rate range (very slow or normal speeds)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">SYNC:</span>
+                    <span class="control-desc">Locks the LFO to the tempo; the DIVISION knob (the RATE knob in the plug-in) then picks a note length from 8 bars to 1/32</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">DEPTH:</span>
@@ -267,15 +333,7 @@
                 </div>
                 <div class="control-item">
                     <span class="control-name">TARGET:</span>
-                    <span class="control-desc">Parameter to modulate</span>
-                </div>
-                <div class="control-item">
-                    <span class="control-name">ON/OFF:</span>
-                    <span class="control-desc">Enable/disable LFO</span>
-                </div>
-                <div class="control-item">
-                    <span class="control-name">SLOW/FAST:</span>
-                    <span class="control-desc">Rate range (very slow or normal speeds)</span>
+                    <span class="control-desc">Parameter to modulate. Choose "Off" to turn the LFO off; choosing a target turns it on</span>
                 </div>
             </div>
 
@@ -284,55 +342,58 @@
                 <h3>Distortion</h3>
                 <div class="control-item">
                     <span class="control-name">DRIVE:</span>
-                    <span class="control-desc">Distortion intensity</span>
+                    <span class="control-desc">Distortion intensity (-20 to +20 dB)</span>
                 </div>
                 <div class="control-item">
-                    <span class="control-name">WET:</span>
+                    <span class="control-name">DRY/WET:</span>
                     <span class="control-desc">Dry/wet balance</span>
                 </div>
-                
+
                 <h3>Delay</h3>
                 <div class="control-item">
                     <span class="control-name">TIME:</span>
-                    <span class="control-desc">Delay time (up to 2 seconds) - set to minimum for no delay</span>
+                    <span class="control-desc">Delay time (up to 2 seconds). Changing it while echoes ring bends their pitch, like tape</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">FEEDBACK:</span>
-                    <span class="control-desc">Delay regeneration amount - set to zero for no delay</span>
+                    <span class="control-desc">Delay regeneration amount. High settings with a held note can swell and build up</span>
                 </div>
-                
+                <div class="control-item">
+                    <span class="control-name">DRY/WET:</span>
+                    <span class="control-desc">Dry/wet balance; set to zero for no delay</span>
+                </div>
+
                 <h3>Reverb</h3>
                 <div class="control-item">
-                    <span class="control-name">WETNESS:</span>
+                    <span class="control-name">ENABLED:</span>
+                    <span class="control-desc">Turn reverb on/off (ON in the plug-in)</span>
+                </div>
+                <div class="control-item">
+                    <span class="control-name">DRY/WET:</span>
                     <span class="control-desc">Reverb amount</span>
                 </div>
                 <div class="control-item">
-                    <span class="control-name">ENABLE:</span>
-                    <span class="control-desc">Turn reverb on/off</span>
+                    <span class="control-name">SIZE:</span>
+                    <span class="control-desc">From a small room (the CAVES v1 sound) to a long hall</span>
                 </div>
             </div>
 
-            <h2>Clock</h2>
+            <h2>Transport (App)</h2>
             <div class="module-section">
-                <h3>Master Clock</h3>
-                <div class="control-item">
-                    <span class="control-name">BPM:</span>
-                    <span class="control-desc">Tempo for envelope sync (60-200 BPM)</span>
-                </div>
                 <div class="control-item">
                     <span class="control-name">START/STOP:</span>
-                    <span class="control-desc">Transport controls</span>
+                    <span class="control-desc">Starts and stops the drone and the clock. Synced LFOs and envelopes follow the patch's tempo (120 BPM in CAVES Default)</span>
                 </div>
                 <div class="control-item">
                     <span class="control-name">RESET:</span>
-                    <span class="control-desc">Reset all parameters for current patch</span>
+                    <span class="control-desc">Reset all parameters to the patch as it was loaded</span>
                 </div>
             </div>
 
-            <h2>Patch Management</h2>
+            <h2>Patch Management (App)</h2>
             <div class="module-section">
                 <p>CAVES includes a complete patch system for saving and organizing your sounds. Patches save all oscillator & filter settings, modulation, effects, and clock settings.</p>
-                
+
                 <h3>Saving Patches</h3>
                 <div class="control-item">
                     <span class="control-name">SAVE BUTTON:</span>
@@ -346,7 +407,7 @@
                     <span class="control-name">AUTO NAME:</span>
                     <span class="control-desc">Automagically generate names for your patches</span>
                 </div>
-                
+
                 <h3>Loading Patches</h3>
                 <div class="control-item">
                     <span class="control-name">PATCH BROWSER:</span>
@@ -357,14 +418,12 @@
                     <span class="control-desc">Simply tap any patch name to load it immediately</span>
                 </div>
 
-                
                 <h3>Deleting Patches</h3>
                 <div class="control-item">
                     <span class="control-name">SWIPE TO DELETE:</span>
                     <span class="control-desc">Swipe left on any user patch to delete it</span>
                 </div>
-                
-                
+
                 <h3>Patch Sharing</h3>
                 <div class="control-item">
                     <span class="control-name">SHARE CURRENT PATCH:</span>
@@ -374,7 +433,9 @@
                     <span class="control-name">PATCH FILES:</span>
                     <span class="control-desc">Patches are sent as .drone files with metadata</span>
                 </div>
-                
+
+                <h3>Patches From CAVES 1.x</h3>
+                <p>Version 2.0 has a new sound engine with smoother modulation. The first time it starts, CAVES converts your saved patches and adjusts their modulation depths to sound as close to before as possible. Most patches sound about the same; patches that modulate Master Level may sound different, because an envelope on Master Level now works as the amplifier. Your original patch files are kept.</p>
             </div>
         </div>
 
@@ -389,7 +450,7 @@
                     </svg>
                 </a>
             </div>
-            <p class="copyright">© 2025 CAVES</p>
+            <p class="copyright">© 2025-2026 CAVES</p>
         </footer>
     </div>
 </body>
